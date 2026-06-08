@@ -2,11 +2,9 @@
 // Màn hình cài đặt: Farmer Account, Display, Data & Sync, Sign out
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../providers/auth_provider.dart';
 import '../theme/app_theme.dart';
-import '../widgets/app_header.dart';
 import 'login_screen.dart';
+import '../widgets/app_header.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -161,21 +159,14 @@ class _SettingsSection extends StatelessWidget {
 class _AccountHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final user = context.read<AuthProvider>().user;
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Row(
         children: [
-          // Avatar
           CircleAvatar(
             radius: 28,
             backgroundColor: AppColors.primaryGreen,
-            backgroundImage: user?.photoURL != null
-                ? NetworkImage(user!.photoURL!)
-                : null,
-            child: user?.photoURL == null
-                ? const Icon(Icons.person, color: Colors.white, size: 28)
-                : null,
+            child: const Icon(Icons.person, color: Colors.white, size: 28),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -189,7 +180,7 @@ class _AccountHeader extends StatelessWidget {
                       ),
                 ),
                 Text(
-                  user?.email ?? 'Manage your profile and preferences',
+                  'Manage your profile and preferences',
                   style: Theme.of(context).textTheme.bodyMedium,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -376,13 +367,10 @@ class _DangerZone extends StatelessWidget {
     );
 
     if (confirm == true && context.mounted) {
-      await context.read<AuthProvider>().signOut();
-      if (context.mounted) {
-        Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (_) => const LoginScreen()),
-          (_) => false,
-        );
-      }
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (_) => const LoginScreen()),
+        (_) => false,
+      );
     }
   }
 }

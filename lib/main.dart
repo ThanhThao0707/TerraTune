@@ -1,28 +1,37 @@
 // lib/main.dart
-import 'package:flutter/material.dart';
-import 'screens/login_screen.dart'; 
+// Điểm khởi động ứng dụng Terratune
+// Khởi tạo Firebase, Provider và điều hướng ban đầu
 
-class AppTheme {
-  static final ThemeData lightTheme = ThemeData(
-    primarySwatch: Colors.blue,
-    brightness: Brightness.light,
-  );
-}
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'screens/splash_screen.dart';
+import 'theme/app_theme.dart';
+
+// TODO: Thay bằng file firebase_options.dart tự động sinh từ FlutterFire CLI
+// import 'firebase_options.dart';
 
 void main() async {
+  // Đảm bảo Flutter binding được khởi tạo trước khi dùng async
   WidgetsFlutterBinding.ensureInitialized();
-  // Đã xóa chữ const ở đây để triệt để lỗi biên dịch
-  runApp(MyApp());
+
+  // Khởi tạo Firebase
+  // Uncomment dòng dưới sau khi chạy: flutterfire configure
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+ // await Firebase.initializeApp();
+
+  runApp(const TerratuneApp());
 }
 
-class MyApp extends StatelessWidget {
+class TerratuneApp extends StatelessWidget {
+  const TerratuneApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Terratune',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const LoginScreen(), // Giữ const ở đây vì LoginScreen đã có cấu trúc const chuẩn
+      home: const SplashScreen(),
     );
   }
 }

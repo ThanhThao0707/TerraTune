@@ -3,8 +3,6 @@
 // Đây là tab Home trong bottom navigation
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../providers/auth_provider.dart';
 import '../models/tree_node.dart';
 import '../theme/app_theme.dart';
 import '../widgets/tree_card.dart';
@@ -15,7 +13,6 @@ import 'tree_detail_screen.dart';
 import 'alerts_screen.dart';
 import 'farm_map_screen.dart';
 import 'settings_screen.dart';
-import 'login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,42 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  Future<void> _handleSignOut() async {
-    final confirm = await showDialog<bool>(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: const Text('Đăng xuất'),
-        content: const Text('Bạn có chắc muốn đăng xuất không?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context, false),
-            child: const Text('Huỷ'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, true),
-            child: const Text(
-              'Đăng xuất',
-              style: TextStyle(color: AppColors.drought),
-            ),
-          ),
-        ],
-      ),
-    );
-    if (confirm == true && mounted) {
-      await context.read<AuthProvider>().signOut();
-      if (mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const LoginScreen()),
-        );
-      }
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     // Danh sách screens tương ứng với mỗi tab
+    // Dùng Consumer để lấy user an toàn tại đây, tránh lỗi Provider scope
     final screens = [
-      _HomeTabContent(onTreeTap: _openTreeDetail),
+      _HomeTabContent(
+        onTreeTap: _openTreeDetail,
+        displayName: 'Vườn xoài Hà Nội',
+      ),
       const AlertsScreen(),
       const SettingsScreen(),
       const FarmMapScreen(),
@@ -96,19 +66,18 @@ class _HomeScreenState extends State<HomeScreen> {
 // ─── Home Tab Content ─────────────────────────────────────────────────────────
 class _HomeTabContent extends StatelessWidget {
   final void Function(TreeNode) onTreeTap;
+  final String displayName;
 
-  const _HomeTabContent({required this.onTreeTap});
+  const _HomeTabContent({required this.onTreeTap, required this.displayName});
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<AuthProvider>().user;
-
     return CustomScrollView(
       slivers: [
         // ── App Header (hồng) ──────────────────────────────────────────
         SliverToBoxAdapter(
           child: TerraAppHeader(
-            subtitle: user?.displayName ?? 'Vườn xoài Hà Nội',
+            subtitle: displayName,
           ),
         ),
 
