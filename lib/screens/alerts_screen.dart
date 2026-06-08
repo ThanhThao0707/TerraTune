@@ -1,5 +1,3 @@
-// lib/screens/alerts_screen.dart
-// Màn hình thông báo: Active Alerts + Notification Preferences
 
 import 'package:flutter/material.dart';
 import '../models/tree_node.dart';

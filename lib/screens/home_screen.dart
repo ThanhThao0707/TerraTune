@@ -1,6 +1,3 @@
-// lib/screens/home_screen.dart
-// Màn hình chính - hiển thị danh sách cây (Sentinel Node Status) + Weekly Summary + Map
-// Đây là tab Home trong bottom navigation
 
 import 'package:flutter/material.dart';
 import '../models/tree_node.dart';

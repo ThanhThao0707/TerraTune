@@ -1,6 +1,4 @@
-// lib/screens/splash_screen.dart
-// Màn hình chờ (loading) - hiển thị khi ứng dụng khởi động
-// Tự động chuyển sang màn hình phù hợp dựa trên trạng thái đăng nhập
+
 
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
@@ -22,7 +20,6 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
 
-    // Animation thanh loading
     _progressController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 2200),
@@ -33,7 +30,6 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _progressController.forward();
 
-    // Chuyển màn hình sau 2.5 giây
     Future.delayed(const Duration(milliseconds: 2500), _navigate);
   }
 

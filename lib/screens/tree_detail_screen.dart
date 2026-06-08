@@ -1,5 +1,4 @@
-// lib/screens/tree_detail_screen.dart
-// Màn hình chi tiết một cây: Acoustic Signature + Recommended Actions + Device Status
+
 
 import 'package:flutter/material.dart';
 import '../models/tree_node.dart';
@@ -302,7 +301,7 @@ class _AcousticSignatureCard extends StatelessWidget {
   }
 }
 
-// Vẽ spectrogram mock bằng CustomPainter
+
 class _SpectrogramPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -353,7 +352,6 @@ class _RecommendedActionsCard extends StatelessWidget {
 
   const _RecommendedActionsCard({required this.tree});
 
-  // Màu sắc xen kẽ cho các action chip
   static const _chipColors = [
     Color(0xFFFFCDD2), // hồng
     Color(0xFFD7CCC8), // nâu nhạt

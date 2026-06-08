@@ -1,6 +1,4 @@
-// lib/screens/login_screen.dart
-// Màn hình chào - chỉ có 1 nút "Get Started" để vào thẳng app
-// Không có auth, không Firebase, không Provider
+
 
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';

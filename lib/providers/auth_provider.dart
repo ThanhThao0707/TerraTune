@@ -1,11 +1,8 @@
-// lib/providers/auth_provider.dart
-// Provider quản lý trạng thái xác thực toàn cục (đăng nhập/đăng xuất)
-// Sử dụng ChangeNotifier để tự động cập nhật UI khi state thay đổi
+
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// Enum trạng thái loading
 enum AuthStatus { initial, loading, authenticated, unauthenticated, error }
 
 class AuthProvider extends ChangeNotifier {
@@ -13,20 +10,16 @@ class AuthProvider extends ChangeNotifier {
   User? _user;
   String? _errorMessage;
 
-  // ─── Getters ─────────────────────────────────────────────────────────────
   AuthStatus get status => _status;
   User? get user => _user;
   String? get errorMessage => _errorMessage;
   bool get isLoading => _status == AuthStatus.loading;
   bool get isAuthenticated => _status == AuthStatus.authenticated;
 
-  // ─── Constructor ──────────────────────────────────────────────────────────
   AuthProvider() {
-    // Lắng nghe thay đổi trạng thái auth từ Firebase ngay khi khởi tạo
     FirebaseAuth.instance.authStateChanges().listen(_onAuthStateChanged);
   }
 
-  // ─── Xử lý thay đổi trạng thái auth ──────────────────────────────────────
   void _onAuthStateChanged(User? user) {
     _user = user;
     _status =
@@ -34,23 +27,22 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // ─── Google Sign-In (Giả lập để vào thẳng Home) ──────────────────────────
+  // ─── Google Sign-In  ──────────────────────────
   Future<bool> signInWithGoogle() async {
     _setLoading();
     try {
-      // Tạo độ trễ nửa giây cho mượt hiệu ứng loading nếu có
       await Future.delayed(const Duration(milliseconds: 500));
       
       _status = AuthStatus.authenticated;
       notifyListeners();
-      return true; // Trả về true để màn hình Login biết và tự động chuyển trang
+      return true; 
     } catch (e) {
       _setError(e.toString().replaceFirst('Exception: ', ''));
       return false;
     }
   }
 
-  // ─── Email Sign-In (Giả lập thành công trực tiếp) ─────────────────────────
+  // ─── Email Sign-In  ─────────────────────────
   Future<bool> signInWithEmail(String email, String password) async {
     _setLoading();
     try {
@@ -65,7 +57,7 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  // ─── Sign Out (Giả lập đăng xuất sạch sẽ) ─────────────────────────────────
+  // ─── Sign Out  ─────────────────────────────────
   Future<void> signOut() async {
     _setLoading();
     try {

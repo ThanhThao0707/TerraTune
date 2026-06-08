@@ -66,8 +66,6 @@ class TreeNode {
   }
 }
 
-// ─── Mock Data ───────────────────────────────────────────────────────────────
-// Dữ liệu mẫu để demo giao diện (thay bằng Firestore thực tế)
 final List<TreeNode> mockTrees = [
   TreeNode(
     id: 't1',

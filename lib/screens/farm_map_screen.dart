@@ -1,6 +1,4 @@
-// lib/screens/farm_map_screen.dart
-// Màn hình bản đồ vườn - tích hợp Google Maps (placeholder)
-// Để dùng thực tế cần thêm package google_maps_flutter
+
 
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
@@ -169,7 +167,7 @@ class FarmMapScreen extends StatelessWidget {
   }
 }
 
-// Mock tree pin trên bản đồ
+
 class _TreePin extends StatelessWidget {
   final String label;
   final bool isHealthy;
@@ -203,7 +201,7 @@ class _TreePin extends StatelessWidget {
   }
 }
 
-// Vẽ grid giả lập bản đồ
+
 class _MapGridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
@@ -211,7 +209,7 @@ class _MapGridPainter extends CustomPainter {
       ..color = const Color(0xFFB8D4B0)
       ..strokeWidth = 1;
 
-    // Vẽ đường ngang
+   
     for (double y = 0; y < size.height; y += 40) {
       canvas.drawLine(Offset(0, y), Offset(size.width, y), paint);
     }

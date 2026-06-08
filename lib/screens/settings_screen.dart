@@ -1,5 +1,4 @@
-// lib/screens/settings_screen.dart
-// Màn hình cài đặt: Farmer Account, Display, Data & Sync, Sign out
+
 
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';

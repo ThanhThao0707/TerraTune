@@ -7,17 +7,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'screens/splash_screen.dart';
 import 'theme/app_theme.dart';
 
-// TODO: Thay bằng file firebase_options.dart tự động sinh từ FlutterFire CLI
-// import 'firebase_options.dart';
 
 void main() async {
   // Đảm bảo Flutter binding được khởi tạo trước khi dùng async
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Khởi tạo Firebase
-  // Uncomment dòng dưới sau khi chạy: flutterfire configure
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
- // await Firebase.initializeApp();
+
 
   runApp(const TerratuneApp());
 }
